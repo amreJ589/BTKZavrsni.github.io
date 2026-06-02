@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-učenje: Interaktivne lekcije</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Parallax Pozadina -->
+    <div class="parallax-bg" id="bg-layer-1"></div>
+    <div class="parallax-bg" id="bg-layer-2"></div>
+
+    <main class="container">
+        <!-- Homepage Scena -->
+        <section id="hero-scene" class="scene active">
+            <div class="text-content">
+                <div class="title-wrapper">
+                    <!-- Stroke animacija (Iscrtavanje knjige/znanja) -->
+                    <svg class="stroke-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path class="stroke-path" d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                        <path class="stroke-path" d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                    </svg>
+                    <h1>Nauči brzo uz <br><span class="highlight">interaktivne lekcije</span></h1>
+                </div>
+                <p>Isprobaj kratki pokazni modul e-učenja. Provjeri svoje znanje o osnovama web tehnologija kroz brzi interaktivni kviz.</p>
+                <div class="action-section">
+                    <p class="action-title">Odaberi aktivnost:</p>
+                    <div class="button-group">
+                        <button id="start-btn" class="primary-btn">Kratki Kviz</button>
+                        <button id="lessons-btn" class="secondary-btn">E-Lekcije</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SVG Lik (Pas vodič) -->
+            <div class="dog-container" id="dog-container">
+                <svg id="guide-dog" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Sjena ispod psa -->
+                    <ellipse class="dog-shadow" cx="100" cy="180" rx="40" ry="8" fill="rgba(0,0,0,0.4)" />
+                    
+                    <g id="dog-character">
+                        <g class="dog-body-group">
+                        <!-- Rep -->
+                        <path class="dog-tail" d="M 130 130 Q 160 100 170 110" fill="none" stroke="#E6A15C" stroke-width="12" stroke-linecap="round" />
+                        
+                        <!-- Tijelo -->
+                        <rect class="dog-torso" x="65" y="100" width="70" height="70" rx="35" fill="#F4B97A" />
+                        
+                        <!-- Noge -->
+                        <rect class="dog-leg" x="75" y="150" width="12" height="30" rx="6" fill="#D99A5A" />
+                        <rect class="dog-leg" x="113" y="150" width="12" height="30" rx="6" fill="#D99A5A" />
+
+                        <!-- Glava -->
+                        <g class="dog-head">
+                            <rect x="50" y="50" width="70" height="70" rx="35" fill="#F4B97A" />
+                            <path d="M 55 60 Q 30 40 40 85" fill="#D99A5A" />
+                            <path d="M 115 60 Q 140 40 130 85" fill="#D99A5A" />
+                            <ellipse cx="65" cy="95" rx="20" ry="15" fill="#FFF3E3" />
+                            <circle cx="55" cy="92" r="6" fill="#333" />
+                            <g class="dog-eyes">
+                                <circle cx="75" cy="75" r="5" fill="#333" />
+                                <circle cx="95" cy="75" r="5" fill="#333" />
+                            </g>
+                        </g>
+                    </g>
+                    </g>
+                </svg>
+            </div>
+        </section>
+
+        <!-- Kviz Scena -->
+        <section id="quiz-scene" class="scene hidden">
+            <div class="quiz-container">
+                <div class="quiz-header">
+                    <button id="back-btn" class="secondary-btn">← Nazad</button>
+                    <div id="quiz-dots" class="quiz-dots">
+                        <!-- Generira se kroz JS -->
+                    </div>
+                </div>
+                <h2>Mini Provjera Znanja</h2>
+                <div id="quiz-content">
+                    <p class="question" id="question-text">Što je zapravo <strong>SVG</strong>?</p>
+                    <div class="options" id="options-container">
+                        <!-- Generira se kroz JS -->
+                    </div>
+                    <div id="quiz-feedback" class="feedback-msg"></div>
+                    <button id="next-btn" class="primary-btn hidden-element" style="margin-top: 1.5rem; width: 100%;">Sljedeće pitanje</button>
+                    <button id="home-btn" class="secondary-btn hidden-element" style="margin-top: 0.5rem; width: 100%;">Povratak na početnu</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- E-Lekcije Scena -->
+        <section id="lessons-scene" class="scene hidden">
+            <div class="lessons-sidebar">
+                <button id="back-from-lessons-btn" class="secondary-btn" style="margin-bottom: 2rem;">← Nazad na početnu</button>
+                <h3 style="margin-bottom: 1rem; color: var(--primary);">SVG Lekcije</h3>
+                <ul id="lessons-nav">
+                    <li data-target="lesson-1" class="active">1. Uvod u SVG</li>
+                    <li data-target="lesson-2">2. Geometrijski oblici</li>
+                    <li data-target="lesson-3">3. Putanja (Path)</li>
+                    <li data-target="lesson-4">4. Stiliziranje (Boje)</li>
+                    <li data-target="lesson-5">5. CSS Animacije</li>
+                </ul>
+            </div>
+            
+            <div class="lessons-content-area">
+                <!-- Lekcija 1 -->
+                <div id="lesson-1" class="lesson-view">
+                    <h2>Uvod u SVG</h2>
+                    <p><strong>SVG (Scalable Vector Graphics)</strong> je XML baziran format za dvodimenzionalnu vektorsku grafiku na webu.</p>
+                    <p>Za razliku od raster formata (poput JPG-a ili PNG-a) koji su građeni od mreže piksela, SVG je građen od matematičkih formula. To znači da preglednik doslovno crta elemente na ekranu na temelju zadanih koordinata.</p>
+                    <ul>
+                        <li><strong>Beskonačna skalabilnost:</strong> Ne gubi kvalitetu pri zumiranju, uvijek je 100% oštar bez obzira na veličinu ekrana.</li>
+                        <li><strong>Mala veličina datoteke:</strong> Često zauzima puno manje prostora od klasičnih slika jer je riječ o običnom tekstu.</li>
+                        <li><strong>Programabilnost:</strong> Elementi se mogu lako animirati pomoću CSS-a i JavaScripta jer su dio DOM stabla.</li>
+                        <li><strong>Dostupnost:</strong> Tekst unutar SVG-a je čitljiv alatima za pristupačnost i pretraživačima (SEO).</li>
+                    </ul>
+                    <div class="example-container">
+                        <div class="code-block">
+&lt;!-- Jednostavan SVG krug --&gt;
+&lt;svg width="100" height="100"&gt;
+  &lt;circle cx="50" cy="50" r="40" 
+          stroke="#10b981" 
+          stroke-width="4" 
+          fill="#34d399" /&gt;
+&lt;/svg&gt;</div>
+                        <div class="live-preview">
+                            <svg width="100" height="100">
+                                <circle cx="50" cy="50" r="40" stroke="#10b981" stroke-width="4" fill="#34d399" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Lekcija 2 -->
+                <div id="lesson-2" class="lesson-view hidden-element">
+                    <h2>Geometrijski oblici</h2>
+                    <p>U SVG-u možete direktno crtati osnovne geometrijske oblike koristeći ugrađene tagove. Svaki oblik zahtijeva specifične atribute za pozicioniranje i dimenzije.</p>
+                    <ul>
+                        <li><code>&lt;rect&gt;</code> - Pravokutnik. Koristi <code>x</code> i <code>y</code> za početnu točku, te <code>width</code> i <code>height</code>. Atributi <code>rx</code> i <code>ry</code> zaobljuju rubove.</li>
+                        <li><code>&lt;circle&gt;</code> - Krug. Definira se centrom (<code>cx</code>, <code>cy</code>) i radijusom (<code>r</code>).</li>
+                        <li><code>&lt;ellipse&gt;</code> - Elipsa. Slična krugu, ali ima horizontalni (<code>rx</code>) i vertikalni radijus (<code>ry</code>).</li>
+                        <li><code>&lt;line&gt;</code> - Linija koja povezuje početnu točku (<code>x1</code>, <code>y1</code>) sa završnom točkom (<code>x2</code>, <code>y2</code>).</li>
+                        <li><code>&lt;polygon&gt;</code> - Oblik s više ravnih linija zadanih kroz atribut <code>points</code>.</li>
+                    </ul>
+                    <div class="example-container">
+                        <div class="code-block">
+&lt;!-- Više oblika u jednom SVG-u --&gt;
+&lt;svg width="150" height="100"&gt;
+  &lt;rect x="10" y="25" width="50" height="50" 
+        rx="10" fill="#3b82f6" /&gt;
+        
+  &lt;ellipse cx="110" cy="50" rx="30" ry="20" 
+           fill="#8b5cf6" /&gt;
+&lt;/svg&gt;</div>
+                        <div class="live-preview">
+                            <svg width="150" height="100">
+                                <rect x="10" y="25" width="50" height="50" rx="10" fill="#3b82f6" />
+                                <ellipse cx="110" cy="50" rx="30" ry="20" fill="#8b5cf6" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lekcija 3 -->
+                <div id="lesson-3" class="lesson-view hidden-element">
+                    <h2>Moćna Putanja (Path)</h2>
+                    <p>Element <code>&lt;path&gt;</code> je najsvestraniji i najmoćniji element u SVG-u. S njim možete nacrtati bilo kakav kompleksni, nepravilni oblik, poput ikona, slova ili našeg SVG psa iz glavnog izbornika!</p>
+                    <p>Sva čarolija nalazi se u atributu <code>d</code> (data), unutar kojeg koristimo posebne naredbe (slova) i koordinate. Najvažnije naredbe:</p>
+                    <ul>
+                        <li><strong>M</strong> (Move To): Pomakni "olovku" na početnu koordinatu bez crtanja (npr. <code>M 10 10</code>).</li>
+                        <li><strong>L</strong> (Line To): Povuci ravnu liniju od trenutne do nove koordinate (npr. <code>L 50 10</code>).</li>
+                        <li><strong>C</strong> ili <strong>Q</strong> (Curve): Crtanje matematičkih krivulja za glatke, zakrivljene linije.</li>
+                        <li><strong>Z</strong> (Close Path): Zatvori putanju povlačenjem ravne linije nazad do prve točke.</li>
+                    </ul>
+                    <div class="example-container">
+                        <div class="code-block">
+&lt;!-- Crtanje jednostavnog trokuta putanjom --&gt;
+&lt;svg width="100" height="100"&gt;
+  &lt;path d="M 50 10 L 90 90 L 10 90 Z" 
+        fill="none" 
+        stroke="#f59e0b" 
+        stroke-width="5" /&gt;
+&lt;/svg&gt;</div>
+                        <div class="live-preview">
+                            <svg width="100" height="100">
+                                <path d="M 50 10 L 90 90 L 10 90 Z" fill="none" stroke="#f59e0b" stroke-width="5" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lekcija 4 -->
+                <div id="lesson-4" class="lesson-view hidden-element">
+                    <h2>Stiliziranje (Boje i Linije)</h2>
+                    <p>Stiliziranje SVG-a vrlo je slično CSS-u, ali se koriste specifični atributi (ili CSS svojstva) namijenjena vektorskoj grafici.</p>
+                    <ul>
+                        <li><strong>fill:</strong> Određuje boju kojom se ispunjava unutarnji prostor oblika (može biti boja, HEX kod ili <code>transparent</code> / <code>none</code>).</li>
+                        <li><strong>stroke:</strong> Određuje boju linije (okvira) oko oblika.</li>
+                        <li><strong>stroke-width:</strong> Određuje debljinu vanjske linije.</li>
+                        <li><strong>stroke-dasharray:</strong> Razbija punu liniju u crtice i praznine (pogledaj primjer). Ovo je ključno za animacije "iscrtavanja" ikona.</li>
+                        <li><strong>stroke-linecap:</strong> Određuje kako izgleda završetak linije (npr. <code>round</code> za glatke, zaobljene krajeve).</li>
+                    </ul>
+                    <div class="example-container">
+                        <div class="code-block">
+&lt;!-- Primjer isprekidane deblje linije --&gt;
+&lt;svg width="100" height="100"&gt;
+  &lt;path d="M 20 50 L 80 50" 
+        stroke="#ef4444" 
+        stroke-width="15" 
+        stroke-linecap="round" 
+        stroke-dasharray="1 30" /&gt;
+&lt;/svg&gt;</div>
+                        <div class="live-preview">
+                            <svg width="100" height="100">
+                                <path d="M 20 50 L 80 50" stroke="#ef4444" stroke-width="15" stroke-linecap="round" stroke-dasharray="1 30" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lekcija 5 -->
+                <div id="lesson-5" class="lesson-view hidden-element">
+                    <h2>CSS Animacije nad SVG-om</h2>
+                    <p>Ono što SVG čini apsolutno superiornim formatom za moderan web je njegova potpuna kompatibilnost s CSS-om i JavaScriptom. Možete primijeniti standardni CSS <code>@keyframes</code> sustav na bilo koji unutarnji SVG element.</p>
+                    <p>Najčešće animacije uključuju promjenu boje (<code>fill</code>), skaliranje, rotaciju, pomicanje po osima ili spomenuto "iscrtavanje" putanja.</p>
+                    <div class="example-container">
+                        <div class="code-block">
+/* CSS klasa dodijeljena SVG krugu */
+.pulsiraj-krug {
+    transform-origin: center;
+    animation: puls 1.5s infinite alternate;
+}
+
+@keyframes puls {
+    from { transform: scale(0.8); opacity: 0.5; }
+    to { transform: scale(1.2); opacity: 1; }
+}</div>
+                        <div class="live-preview">
+                            <svg width="100" height="100">
+                                <circle class="pulsiraj-krug" cx="50" cy="50" r="30" fill="#0ea5e9" />
+                                <style>
+                                    .pulsiraj-krug {
+                                        transform-origin: center;
+                                        animation: puls 1.5s infinite alternate ease-in-out;
+                                    }
+                                    @keyframes puls {
+                                        from { transform: scale(0.8); opacity: 0.5; }
+                                        to { transform: scale(1.2); opacity: 1; }
+                                    }
+                                </style>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Watermark poput 'Activate Windows' -->
+    <div id="watermark">
+        Bruno Tolić Kalanj<br>
+        Završni rad 2026.
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
